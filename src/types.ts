@@ -1,8 +1,10 @@
 /** Shared types for the Heidi SDK. */
 
 export const HEIDI_DATA_API_BASE_PATH = "/api/data/v1";
+export const HEIDI_FILES_API_BASE_PATH = "/api/files/v1";
 export const HEIDI_DATA_WRITE_KEY_HEADER = "x-heidi-data-key";
 export const HEIDI_APP_USER_HEADER = "x-heidi-app-user";
+export const HEIDI_FILE_NAME_HEADER = "x-heidi-file-name";
 
 export type HeidiFilterOperator =
   | "eq"
@@ -50,6 +52,16 @@ export type HeidiListResult = {
   nextCursor: string | null;
   records: HeidiRecord[];
   total: number;
+};
+
+/** A stored file asset. `url` is the world-readable public URL. */
+export type HeidiAsset = {
+  assetId: string;
+  contentType: string;
+  createdAt?: string;
+  key: string;
+  sizeBytes: number | null;
+  url: string;
 };
 
 /** A signed-in app user's OAuth 2.1 token set. */

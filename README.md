@@ -84,6 +84,24 @@ Refresh when it expires (15-minute access tokens, rotating refresh):
 const fresh = await auth.refresh(tokens.refreshToken);
 ```
 
+## Heidi Files
+
+Upload, list, and delete files at runtime. Files are stored by Heidi and served
+from a public URL; access is gated like Heidi Data (pass a signed-in user's
+`accessToken` or the project `writeKey`).
+
+```ts
+import { createHeidiFiles } from "heidi-sdk";
+
+const files = createHeidiFiles({ projectId, accessToken: tokens.accessToken });
+
+const asset = await files.upload(file, { filename: "avatar.png" });
+console.log(asset.url); // -> public URL
+
+await files.list();
+await files.remove(asset.assetId);
+```
+
 ## Agents (MCP)
 
 Because Heidi Auth is built on OAuth 2.1 + the discovery RFCs, a Heidi project's
@@ -94,7 +112,8 @@ authenticated with the same tokens. No extra client needed.
 
 - `createHeidiData(config)` → `{ list, get, insert, update, remove, count, collection }`
 - `createHeidiAuth(config)` → `{ startEmailSignIn, completeEmailSignIn, completeMagicLink, beginGoogleSignIn, beginGithubSignIn, completeRedirectSignIn, refresh }`
-- Types: `HeidiQuery`, `HeidiRecord`, `HeidiListResult`, `HeidiTokenSet`, `HeidiError`, …
+- `createHeidiFiles(config)` → `{ upload, list, remove }`
+- Types: `HeidiQuery`, `HeidiRecord`, `HeidiListResult`, `HeidiTokenSet`, `HeidiAsset`, `HeidiError`, …
 
 ## License
 
