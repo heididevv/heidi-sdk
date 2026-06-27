@@ -54,6 +54,22 @@ export type HeidiListResult = {
   total: number;
 };
 
+export type HeidiAggregateOp = "count" | "sum" | "avg" | "min" | "max";
+
+export type HeidiAggregateSpec = {
+  field?: string;
+  groupBy?: string;
+  op: HeidiAggregateOp;
+};
+
+export type HeidiAggregateResult = {
+  field: string | null;
+  groupBy: string | null;
+  groups: { count: number; key: string | null; value: number }[] | null;
+  op: HeidiAggregateOp;
+  value: number | null;
+};
+
 /** A stored file asset. `url` is the world-readable public URL. */
 export type HeidiAsset = {
   assetId: string;

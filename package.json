@@ -1,6 +1,6 @@
 {
   "name": "heidi-sdk",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "The official Heidi SDK — typed, dependency-free clients for Heidi Data (CMS/data), Heidi App Auth (OAuth 2.1 sign-in), and Heidi Files in any generated or hand-written app.",
   "license": "MIT",
   "author": "Heidi",

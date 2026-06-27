@@ -110,10 +110,10 @@ authenticated with the same tokens. No extra client needed.
 
 ## API
 
-- `createHeidiData(config)` → `{ list, get, insert, update, remove, count, collection }`
+- `createHeidiData(config)` → `{ list, get, insert, update, remove, count, aggregate, collection }`
 - `createHeidiAuth(config)` → `{ startEmailSignIn, completeEmailSignIn, completeMagicLink, beginGoogleSignIn, beginGithubSignIn, completeRedirectSignIn, refresh }`
 - `createHeidiFiles(config)` → `{ upload, list, remove }`
-- Types: `HeidiQuery`, `HeidiRecord`, `HeidiListResult`, `HeidiTokenSet`, `HeidiAsset`, `HeidiError`, …
+- Types: `HeidiQuery`, `HeidiRecord`, `HeidiListResult`, `HeidiTokenSet`, `HeidiAsset`, `HeidiAggregateSpec`, `HeidiError`, …
 
 ## License
 

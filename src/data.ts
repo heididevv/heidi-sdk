@@ -4,6 +4,8 @@ import {
   HEIDI_DATA_WRITE_KEY_HEADER,
   HeidiError,
   type HeidiAccessTokenProvider,
+  type HeidiAggregateResult,
+  type HeidiAggregateSpec,
   type HeidiAppUser,
   type HeidiListResult,
   type HeidiQuery,
@@ -26,6 +28,11 @@ export type HeidiDataConfig = {
 };
 
 export type HeidiDataClient = {
+  aggregate: (
+    collection: string,
+    spec: HeidiAggregateSpec,
+    query?: HeidiQuery
+  ) => Promise<HeidiAggregateResult>;
   collection: (collection: string) => HeidiCollectionClient;
   count: (collection: string, query?: HeidiQuery) => Promise<number>;
   get: (collection: string, recordKey: string) => Promise<HeidiRecord | null>;
@@ -44,6 +51,10 @@ export type HeidiDataClient = {
 };
 
 export type HeidiCollectionClient = {
+  aggregate: (
+    spec: HeidiAggregateSpec,
+    query?: HeidiQuery
+  ) => Promise<HeidiAggregateResult>;
   count: (query?: HeidiQuery) => Promise<number>;
   get: (recordKey: string) => Promise<HeidiRecord | null>;
   insert: (
@@ -132,8 +143,15 @@ export function createHeidiData(config: HeidiDataConfig): HeidiDataClient {
   }
 
   const client: HeidiDataClient = {
+    async aggregate(collection, spec, query) {
+      return await request<HeidiAggregateResult>(`/${seg(collection)}/aggregate`, {
+        body: JSON.stringify({ ...spec, query }),
+        method: "POST"
+      });
+    },
     collection(collection) {
       return {
+        aggregate: (spec, query) => client.aggregate(collection, spec, query),
         count: (query) => client.count(collection, query),
         get: (recordKey) => client.get(collection, recordKey),
         insert: (data, options) => client.insert(collection, data, options),
