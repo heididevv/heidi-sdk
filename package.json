@@ -1,0 +1,56 @@
+{
+  "name": "heidi-sdk",
+  "version": "0.1.0",
+  "description": "The official Heidi SDK — typed, dependency-free clients for Heidi Data (CMS/data) and Heidi App Auth (OAuth 2.1 sign-in) in any generated or hand-written app.",
+  "license": "MIT",
+  "author": "Heidi",
+  "homepage": "https://heidi.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heididevv/heidi-sdk.git"
+  },
+  "keywords": [
+    "heidi",
+    "sdk",
+    "cms",
+    "data",
+    "auth",
+    "oauth",
+    "oauth2.1",
+    "pkce",
+    "mcp"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "tsup": "8.5.0",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
